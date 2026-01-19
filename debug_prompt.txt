@@ -1,0 +1,240 @@
+You are an expert Data Engineer Agent. Your goal is to create a transformation plan that maps source columns to target columns.
+
+FUNCTION REGISTRY (available functions):
+- SPLIT_FULL_NAME: Split full name into first/middle/last. Params: delimiter (auto|space|comma), culture (western|eastern), handle_single_name (first_name_only|last_name_only)
+- REGEX_EXTRACT: Extract via regex. Params: pattern (regex string), group_index (int)
+- CLEAN_WHITESPACE: Remove extra spaces. No params.
+- SMART_DATE_PARSE: Parse dates. Params: ambiguity_preference (US|UK|ISO)
+- FORMAT_DATE: Format dates. Params: target_format (strftime format)
+- NORMALIZE_CURRENCY: Clean currency values. Params: currency_symbol (optional)
+- MAP_VALUES: Map categories. Params: mapping_dict (object), default (string)
+- CONDITIONAL_FILL: Fill empty with fallback. Params: fallback_col (string)
+- NORMALIZE_PHONE: Normalize phone numbers. Params: region (IN|US|etc), format (E.164|NATIONAL|INTERNATIONAL)
+- VALIDATE_EMAIL: Validate email format. No params (validation only).
+- VALIDATE_GSTIN: Validate Indian GSTIN. No params (validation only).
+- LOOKUP_PINCODE: Enrich pincode to city/state. Params: provider (optional)
+- UPPERCASE, LOWERCASE, TITLECASE: Case conversion. No params.
+- CONCATENATE: Join columns. Params: separator (string). Use input_cols for multiple columns.
+- COMPUTE_DATE_DIFF: Difference in days (date1 - date2). Params: date2_col (string) OR use input_cols=[date1, date2].
+
+RULES:
+1. PREFER PREBUILT: Always use registry functions. Only mark "requires_user_input" for truly ambiguous cases.
+2. BE EXPLICIT: For REGEX_EXTRACT, write the actual regex pattern.
+3. DATA ENRICHMENT: If target needs City/State and source has Pincode, add enrichment.
+4. COMPUTED COLUMNS: Check 'transformation_hint' in target schema.
+   - For 'CONCATENATE', use action="transform", function="CONCATENATE", and input_cols=[col1, col2...].
+   - For 'COMPUTE', use action="transform", function="COMPUTE_DATE_DIFF", input_cols=[date1, date2].
+5. COLUMN MATCHING: Match columns by name similarity AND semantic type.
+5. CONFIDENCE: Set confidence_score based on match quality (0.0-1.0).
+
+OUTPUT: Return ONLY valid JSON with this structure:
+{
+  "transformation_id": "uuid",
+  "confidence_score": 0.95,
+  "column_mappings": [
+    {"source_col": "Name", "target_col": "first_name", "action": "transform", "transform_id": "tf_01"}
+  ],
+  "transformations": [
+    {"id": "tf_01", "function": "SPLIT_FULL_NAME", "input_col": "Name", "output_cols": ["first_name", "last_name"], "params": {"delimiter": "auto"}}
+  ],
+  "enrichments": [
+    {"id": "en_01", "trigger_col": "Pincode", "target_cols": ["city", "state"], "api_service": "postal_code_lookup", "strategy": "cache_first_then_api"}
+  ],
+  "unmapped_source_cols": ["Column_X"],
+  "unmapped_target_cols": ["middle_name"],
+  "warnings": ["Phone numbers have mixed formats"],
+  "requires_user_input": false,
+  "user_questions": []
+}
+
+Do not include markdown or text outside the JSON.
+
+Create a transformation plan to convert the source data to the target schema.
+
+SOURCE SCHEMA ANALYSIS:
+{
+  "file_name": "invoice_data (3).csv",
+  "total_rows": 5,
+  "columns": [
+    {
+      "name": "itemName",
+      "type": "string",
+      "semantic": "description",
+      "samples": [
+        "FRUIT BISCUITS 400",
+        "HAIR SPA SHAMPOO",
+        "SPICY BISCUIT"
+      ],
+      "completeness": "86%",
+      "suggested_functions": [
+        "CLEAN_WHITESPACE"
+      ]
+    },
+    {
+      "name": "quantity",
+      "type": "integer",
+      "semantic": "quantity",
+      "samples": [
+        "1",
+        "3",
+        "5"
+      ],
+      "completeness": "86%",
+      "suggested_functions": []
+    },
+    {
+      "name": "price",
+      "type": "integer",
+      "semantic": "currency",
+      "samples": [
+        "165",
+        "690",
+        "25"
+      ],
+      "completeness": "71%",
+      "suggested_functions": []
+    }
+  ],
+  "issues": [
+    {
+      "type": "empty_rows",
+      "desc": "Row 6 contains empty values across all columns"
+    },
+    {
+      "type": "multi_row_header",
+      "desc": "Row 7 contains 'Total Invoice Amount:' in itemName column - this is a footer/summary row mixed with data"
+    },
+    {
+      "type": "inconsistent_types",
+      "desc": "The quantity column contains both line-item quantities and what appears to be a total amount (1117), suggesting summary data is mixed with transactional data"
+    }
+  ]
+}
+
+TARGET SCHEMA:
+{
+  "name": "Custom_Customer_Enhanced",
+  "columns": [
+    {
+      "name": "First Name",
+      "type": "string",
+      "required": true,
+      "pattern": null,
+      "common_names": [
+        "first_name",
+        "firstname",
+        "fname",
+        "first"
+      ],
+      "transformation_hint": null
+    },
+    {
+      "name": "Last Name",
+      "type": "string",
+      "required": true,
+      "pattern": null,
+      "common_names": [
+        "last_name",
+        "lastname",
+        "lname",
+        "last",
+        "surname"
+      ],
+      "transformation_hint": null
+    },
+    {
+      "name": "Gender",
+      "type": "string",
+      "required": false,
+      "pattern": null,
+      "common_names": [
+        "gender",
+        "sex"
+      ],
+      "transformation_hint": null
+    },
+    {
+      "name": "Country",
+      "type": "string",
+      "required": false,
+      "pattern": null,
+      "common_names": [
+        "country",
+        "nation"
+      ],
+      "transformation_hint": null
+    },
+    {
+      "name": "Age",
+      "type": "integer",
+      "required": false,
+      "pattern": null,
+      "common_names": [
+        "age"
+      ],
+      "transformation_hint": null
+    },
+    {
+      "name": "Date",
+      "type": "date",
+      "required": false,
+      "pattern": null,
+      "common_names": [
+        "date",
+        "record_date",
+        "ref_date"
+      ],
+      "transformation_hint": null
+    },
+    {
+      "name": "Id",
+      "type": "integer",
+      "required": true,
+      "pattern": null,
+      "common_names": [
+        "id",
+        "customer_id",
+        "cust_id"
+      ],
+      "transformation_hint": null
+    },
+    {
+      "name": "full_name",
+      "type": "string",
+      "required": true,
+      "pattern": null,
+      "common_names": [
+        "full_name",
+        "fullname",
+        "name"
+      ],
+      "transformation_hint": "CONCATENATE: 'First Name' + ' ' + 'Last Name'"
+    },
+    {
+      "name": "age_at_current",
+      "type": "integer",
+      "required": true,
+      "pattern": null,
+      "common_names": [
+        "age_at_current",
+        "current_age"
+      ],
+      "transformation_hint": "COMPUTE: Age + years_between(Date, '2025-12-31')"
+    }
+  ],
+  "required_columns": [
+    "First Name",
+    "Last Name",
+    "Id",
+    "full_name",
+    "age_at_current"
+  ]
+}
+
+CRITICAL INSTRUCTIONS:
+1. Look for 'transformation_hint' in the TARGET SCHEMA columns.
+2. If a hint exists (e.g., CONCATENATE, COMPUTE), you MUST create a 'transformations' entry for it.
+3. Do not just map columns directly if a transformation is required.
+4. For computed columns, set action="transform" in column_mappings.
+
+Generate the transformation plan as JSON.

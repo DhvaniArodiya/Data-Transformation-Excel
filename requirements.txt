@@ -1,0 +1,29 @@
+# AI Excel Transformation System Dependencies
+
+# AI/LLM
+anthropic>=0.34.0
+
+# Data Processing
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# API Framework
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+
+# Validation & Configuration
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+
+# HTTP Client (for enrichment APIs)
+httpx>=0.25.0
+
+# Phone Number Validation
+phonenumbers>=8.13.0
+
+# File Uploads
+python-multipart>=0.0.6
+
+# Utilities
+uuid6>=2024.1.12
