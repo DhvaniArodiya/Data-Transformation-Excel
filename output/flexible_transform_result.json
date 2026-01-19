@@ -1,0 +1,272 @@
+{
+  "ledger_master": [
+    {
+      "ledger_id": 1,
+      "ledger_name": "ABC",
+      "address": "3275/A, 12TH MAIN ROAD,DOMLUR, H A L II STAGE, HAL 2ND STAGE, WARD NO 72, BENGALURU",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28"
+    },
+    {
+      "ledger_id": 2,
+      "ledger_name": "Shrefa Infoware",
+      "address": "1, Kalyan Vishika,Hinjawadi,Pune",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28"
+    },
+    {
+      "ledger_id": 3,
+      "ledger_name": "AC",
+      "address": "25,Next Corporate,Mint Street,Chennai",
+      "city": "Chennai",
+      "state": "Tamilnadu",
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28"
+    },
+    {
+      "ledger_id": 4,
+      "ledger_name": "Shakti Data",
+      "address": "104,Shrey Complex,Akshar chowk,Vadodara",
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28"
+    },
+    {
+      "ledger_id": 5,
+      "ledger_name": "Dholariya Boiler",
+      "address": "22, Nr Express Highway,Phase Iv,Dahisar,Mumbai",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28"
+    },
+    {
+      "ledger_id": 6,
+      "ledger_name": "SHREE VEG PRODUCTS",
+      "address": "502,Alakh Complex,Nr Army School,Meerut",
+      "city": "Meerut",
+      "state": "UP",
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28"
+    }
+  ],
+  "ledger_transactions": [
+    {
+      "transaction_id": 1,
+      "ledger_id": 1,
+      "transaction_date": "2025-04-01",
+      "voucher_type": NaN,
+      "voucher_no": NaN,
+      "narration": "By - Opening Balance",
+      "debit": NaN,
+      "credit": 1702.0,
+      "balance": NaN,
+      "balance_type": NaN
+    },
+    {
+      "transaction_id": 2,
+      "ledger_id": 2,
+      "transaction_date": "2025-05-13",
+      "voucher_type": "Payment",
+      "voucher_no": 99,
+      "narration": "To - Kotak Mahindra Bank",
+      "debit": 25000.0,
+      "credit": NaN,
+      "balance": 25000.0,
+      "balance_type": "Dr"
+    },
+    {
+      "transaction_id": 3,
+      "ledger_id": 2,
+      "transaction_date": "2025-05-15",
+      "voucher_type": "Payment",
+      "voucher_no": "101",
+      "narration": "To - Kotak Mahindra Bank",
+      "debit": 57497.0,
+      "credit": NaN,
+      "balance": 57497.0,
+      "balance_type": "Dr"
+    },
+    {
+      "transaction_id": 4,
+      "ledger_id": 2,
+      "transaction_date": "2025-05-24",
+      "voucher_type": "Purchase",
+      "voucher_no": "GST/25-26/111",
+      "narration": "By - (as per details)",
+      "debit": NaN,
+      "credit": 324500.0,
+      "balance": 324500.0,
+      "balance_type": "Cr"
+    },
+    {
+      "transaction_id": 5,
+      "ledger_id": 2,
+      "transaction_date": "2025-06-21",
+      "voucher_type": "Payment",
+      "voucher_no": "197",
+      "narration": "To - Kotak Mahindra Bank",
+      "debit": 209542.0,
+      "credit": NaN,
+      "balance": 209542.0,
+      "balance_type": "Dr"
+    },
+    {
+      "transaction_id": 6,
+      "ledger_id": 3,
+      "transaction_date": "2025-04-01",
+      "voucher_type": NaN,
+      "voucher_no": NaN,
+      "narration": "To - Opening Balance",
+      "debit": 37852.2,
+      "credit": NaN,
+      "balance": NaN,
+      "balance_type": NaN
+    },
+    {
+      "transaction_id": 7,
+      "ledger_id": 4,
+      "transaction_date": "2025-04-01",
+      "voucher_type": NaN,
+      "voucher_no": NaN,
+      "narration": "To - Opening Balance",
+      "debit": 75000.0,
+      "credit": NaN,
+      "balance": NaN,
+      "balance_type": NaN
+    },
+    {
+      "transaction_id": 8,
+      "ledger_id": 5,
+      "transaction_date": "2025-05-29",
+      "voucher_type": "Payment",
+      "voucher_no": "114",
+      "narration": "To - Kotak Mahindra Bank",
+      "debit": 25000.0,
+      "credit": NaN,
+      "balance": 25000.0,
+      "balance_type": "Dr"
+    },
+    {
+      "transaction_id": 9,
+      "ledger_id": 5,
+      "transaction_date": "2025-06-25",
+      "voucher_type": "Payment",
+      "voucher_no": "208",
+      "narration": "To - Kotak Mahindra Bank",
+      "debit": 1450000.0,
+      "credit": NaN,
+      "balance": 1450000.0,
+      "balance_type": "Dr"
+    },
+    {
+      "transaction_id": 10,
+      "ledger_id": 5,
+      "transaction_date": "2025-07-05",
+      "voucher_type": "Purchase",
+      "voucher_no": "AB;/25-26/058",
+      "narration": "By - (as per details)",
+      "debit": NaN,
+      "credit": 1475000.0,
+      "balance": 1475000.0,
+      "balance_type": "Cr"
+    },
+    {
+      "transaction_id": 11,
+      "ledger_id": 5,
+      "transaction_date": "2025-07-05",
+      "voucher_type": "Purchase",
+      "voucher_no": "AB;/25-26/059",
+      "narration": "By - (as per details)",
+      "debit": NaN,
+      "credit": 212400.0,
+      "balance": 212400.0,
+      "balance_type": "Cr"
+    },
+    {
+      "transaction_id": 12,
+      "ledger_id": 6,
+      "transaction_date": "2025-04-01",
+      "voucher_type": NaN,
+      "voucher_no": NaN,
+      "narration": "To - Opening Balance",
+      "debit": 292215.0,
+      "credit": NaN,
+      "balance": NaN,
+      "balance_type": NaN
+    },
+    {
+      "transaction_id": 13,
+      "ledger_id": 6,
+      "transaction_date": "2025-04-18",
+      "voucher_type": "Sales",
+      "voucher_no": "FBPL/007",
+      "narration": "To - (as per details)",
+      "debit": 364875.0,
+      "credit": NaN,
+      "balance": 364875.0,
+      "balance_type": "Dr"
+    },
+    {
+      "transaction_id": 14,
+      "ledger_id": 6,
+      "transaction_date": "2025-05-09",
+      "voucher_type": "Receipt",
+      "voucher_no": "19",
+      "narration": "By - Kotak Mahindra Bank",
+      "debit": NaN,
+      "credit": 200000.0,
+      "balance": 200000.0,
+      "balance_type": "Cr"
+    }
+  ],
+  "report_metadata": [
+    {
+      "report_id": 1,
+      "ledger_id": 1,
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28",
+      "generated_on": "2026-01-10"
+    },
+    {
+      "report_id": 2,
+      "ledger_id": 2,
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28",
+      "generated_on": "2026-01-10"
+    },
+    {
+      "report_id": 3,
+      "ledger_id": 3,
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28",
+      "generated_on": "2026-01-10"
+    },
+    {
+      "report_id": 4,
+      "ledger_id": 4,
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28",
+      "generated_on": "2026-01-10"
+    },
+    {
+      "report_id": 5,
+      "ledger_id": 5,
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28",
+      "generated_on": "2026-01-10"
+    },
+    {
+      "report_id": 6,
+      "ledger_id": 6,
+      "period_start": "2025-04-01",
+      "period_end": "2025-08-28",
+      "generated_on": "2026-01-10"
+    }
+  ]
+}
